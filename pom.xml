@@ -13,9 +13,13 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!--        Project properties-->
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
         <maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
         <maven-checkstyle-plugin.version>3.1.1</maven-checkstyle-plugin.version>
+
+        <!--        Dependencies-->
         <testng.version>7.1.0</testng.version>
         <allure.version>2.13.8</allure.version>
         <aspectj.version>1.8.10</aspectj.version>
@@ -26,6 +30,9 @@
         <commons-io.version>2.8.0</commons-io.version>
         <rest-assured.version>4.3.3</rest-assured.version>
         <cucumber-java.version>5.7.0</cucumber-java.version>
+
+        <!--        XML suites-->
+        <general-suite>src/test/resources/suites/general.xml</general-suite>
     </properties>
 
     <dependencies>
@@ -82,7 +89,6 @@
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
             <version>${assertj-core.version}</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.poi</groupId>
@@ -203,4 +209,51 @@
             </plugins>
         </pluginManagement>
     </build>
+
+    <profiles>
+        <profile>
+            <id>hw5</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <!--            Failsafe-->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <version>${maven-failsafe-plugin.version}</version>
+                        <configuration>
+                            <argLine>
+                                -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                            </argLine>
+                            <systemPropertyVariables>
+                                <allure.results.directory>${project.build.directory}/allure-results
+                                </allure.results.directory>
+                            </systemPropertyVariables>
+                            <suiteXmlFiles>
+                                <suiteXmlFile>${general-suite}</suiteXmlFile>
+                            </suiteXmlFiles>
+                        </configuration>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.aspectj</groupId>
+                                <artifactId>aspectjweaver</artifactId>
+                                <version>${aspectj.version}</version>
+                            </dependency>
+                        </dependencies>
+                        <executions>
+                            <execution>
+                                <phase>integration-test</phase>
+                                <goals>
+                                    <goal>integration-test</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
 </project>
