@@ -22,6 +22,7 @@
         <!--        Dependencies-->
         <testng.version>7.1.0</testng.version>
         <allure.version>2.13.8</allure.version>
+        <allure-maven.version>2.10.0</allure-maven.version>
         <aspectj.version>1.8.10</aspectj.version>
         <selenide.version>5.19.0</selenide.version>
         <poi.version>5.0.0</poi.version>
@@ -212,7 +213,7 @@
 
     <profiles>
         <profile>
-            <id>hw5</id>
+            <id>main</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
@@ -246,7 +247,7 @@
                             <execution>
                                 <phase>integration-test</phase>
                                 <goals>
-                                    <goal>integration-test</goal>
+                                    <goal>verify</goal>
                                 </goals>
                             </execution>
                         </executions>
@@ -255,5 +256,19 @@
             </build>
         </profile>
     </profiles>
+
+    <reporting>
+        <excludeDefaults>true</excludeDefaults>
+        <plugins>
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>${allure-maven.version}</version>
+                <configuration>
+                    <reportVersion>${allure.version}</reportVersion>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
 
 </project>
