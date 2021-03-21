@@ -3,16 +3,18 @@ package steps;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.assertj.core.api.Assertions;
+import pages.BasePage;
 
 import static com.codeborne.selenide.Selenide.*;
 
 public class CommonSteps {
 
+    public static final BasePage basePage = new BasePage();
     public static final String BASIC_URL = "https://trello.com/";
 
     @Given("I open Trello Main Page")
     public void i_open_Trello_Main_Page() {
-        open(BASIC_URL);
+        basePage.login(BASIC_URL);
     }
 
     @Then("page title should be {string}")
