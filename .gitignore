@@ -1,4 +1,5 @@
 .idea/
 .allure/
 target/
+build/
 project_kb.txt
