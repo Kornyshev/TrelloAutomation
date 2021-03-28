@@ -31,6 +31,6 @@ public class CommonSteps {
 
     @Then("header in Hero Section on Main Page has correct text {string}")
     public void headerInHeroSectionOnMainPageHasCorrectTextText(String string) {
-        assertThat(mainPage.getTextOfHeaderInHeroSection()).isEqualTo(string);
+        assertThat(mainPage.getMainHeaderText()).isEqualTo(string);
     }
 }

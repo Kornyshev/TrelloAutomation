@@ -1,11 +1,13 @@
 package pages;
 
+import pages.properties.HasLanguagePicker;
+import pages.properties.HasMainHeader;
+
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 
-public class MainPage extends BasePage{
+public class MainPage extends BasePage implements HasMainHeader, HasLanguagePicker {
 
-    private final String mainPageHeaderXPath = "//h1";
     private final String logInHeaderButtonXPath = "//header//a[contains(@href, 'login')]";
     private final String signUpHeaderButtonXPath = "//header//a[contains(@href, 'signup')]";
 
@@ -18,11 +20,6 @@ public class MainPage extends BasePage{
     private final String signUpButtonInSignUpSectionXPath = signUpSectionXPath + "//button[@type='submit']";
 
     private final String startDoingSignUpButtonXPath = "//a[contains(text(), ''Start doing)]";
-    private final String languageSelectorXPath = "//select[@name='language-picker']";
-
-    public String getTextOfHeaderInHeroSection() {
-        return $x(mainPageHeaderXPath).getText();
-    }
 
     public void clickOnHeaderLogInButton() {
         $x(logInHeaderButtonXPath).shouldBe(visible).scrollTo().click();
@@ -64,13 +61,5 @@ public class MainPage extends BasePage{
                 .shouldBe(visible)
                 .scrollIntoView("{behavior: \"instant\", block: \"center\", inline: \"center\"}")
                 .click();
-    }
-
-    public void selectLanguageInPicker(String lang) {
-        $x(languageSelectorXPath).shouldBe(visible).scrollTo().selectOption(lang);
-    }
-
-    public String selectedOptionInLanguagePicker() {
-        return $x(languageSelectorXPath).getSelectedText();
     }
 }
