@@ -4,9 +4,10 @@ import pages.properties.HasLanguagePicker;
 import pages.properties.HasMainHeader;
 import pages.properties.HasSocialNetworkLogin;
 
-import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.$x;
-
 public class LogInPage implements HasMainHeader, HasLanguagePicker, HasSocialNetworkLogin {
 
+    private final String emailFieldXPath = "";
+    private final String passFieldXPath = "";
+    private final String logInButtonXPath = "";
+    private final String signUpForAnAccountLinkXPath = "";
 }

@@ -43,11 +43,12 @@ Feature: Check basic elements on Main Page
     Then Sign Up page have correct 'Sign up for your account' in Main Header
     Then page title should be 'Create a Trello Account'
 
-  Scenario Outline: The Sign Up Button leads to correct Sign Up page
+  Scenario Outline: Localization checking on the Main Page
     Given I open Trello Main Page
     When choose '<Language>' in Language dropdown on Main Page
     Then header in Hero Section on Main Page has correct text '<Header>'
     Then Language picker has correct value '<Language>'
+    When choose 'English' in Language dropdown on Main Page
     Examples:
       | Language   | Header                                               |
       | Deutsch    | Trello hilft Teams, ihre Arbeit voranzutreiben.      |
